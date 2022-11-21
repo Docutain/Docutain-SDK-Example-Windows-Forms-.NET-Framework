@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
@@ -45,7 +46,7 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             //open file dialog to pick a file
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                ofd.Filter = "Supported files (*.PDF;*.JPG; *.JPEG; *.PNG; *.TIF; *.TIFF; *.HEIC)|*.PDF; *.JPG; *.JPEG; *.PNG; *.TIF; *.TIFF; *.HEIC";
+                ofd.Filter = "Supported files (*.PDF; *.JPG; *.JPEG; *.PNG; *.TIF; *.TIFF; *.HEIC)|*.PDF; *.JPG; *.JPEG; *.PNG; *.TIF; *.TIFF; *.HEIC";
                 ofd.Filter += "|PDF files (*.PDF)|*.PDF|JPG files (*.JPG; *.JPEG)|*.JPG; *.JPEG|PNG files (*.PNG)|*.PNG|TIF files (*.TIF; *.TIFF)|*.TIF; *.TIFF|HEIC files (*.HEIC)|*.HEIC";
                 ofd.FilterIndex = 1;
                 ofd.RestoreDirectory = false;
@@ -164,7 +165,7 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             //select the file you wish to add as page to the currently loaded document
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                ofd.Filter = "Supported files (*.PDF;*.JPG; *.JPEG; *.PNG; *.TIF; *.TIFF; *.HEIC)|*.PDF; *.JPG; *.JPEG; *.PNG; *.TIF; *.TIFF; *.HEIC";
+                ofd.Filter = "Supported files (*.PDF; *.JPG; *.JPEG; *.PNG; *.TIF; *.TIFF; *.HEIC)|*.PDF; *.JPG; *.JPEG; *.PNG; *.TIF; *.TIFF; *.HEIC";
                 ofd.Filter += "|PDF files (*.PDF)|*.PDF|JPG files (*.JPG; *.JPEG)|*.JPG; *.JPEG|PNG files (*.PNG)|*.PNG|TIF files (*.TIF; *.TIFF)|*.TIF; *.TIFF|HEIC files (*.HEIC)|*.HEIC";
                 ofd.FilterIndex = 1;
                 ofd.RestoreDirectory = false;
@@ -225,6 +226,16 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
 			WriteState("Logfile opened");
         }
 
+        private void btSet_Click(object sender, EventArgs e)
+        {
+            Docutain.SDK.Windows.AnalyzeConfiguration analyzeConfiguration = new Docutain.SDK.Windows.AnalyzeConfiguration();
+            analyzeConfiguration.ReadBIC = cbBIC.Checked;
+            analyzeConfiguration.ReadPaymentState = cbPaymentState.Checked;
+            Docutain.SDK.Windows.DocutainSDK.SetAnalyzeConfiguration(analyzeConfiguration);
+
+            WriteState("Configuration saved");
+        }
+
         private void btClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -237,7 +248,7 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
         public string Date { get; set; }
         public string Amount { get; set; }
         public string InvoiceId { get; set; }
-        public string reference { get; set; }
+        public string Reference { get; set; }
     }
 
     public class Address
@@ -250,6 +261,6 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
         public string Street { get; set; }
         public string Phone { get; set; }
         public string CustomerId { get; set; }
-        public string IBAN { get; set; }
+        public string[] IBAN { get; set; }
     }
 }

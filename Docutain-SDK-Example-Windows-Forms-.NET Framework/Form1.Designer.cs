@@ -43,6 +43,7 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             this.rbLDFilepath = new System.Windows.Forms.RadioButton();
             this.rbLDStream = new System.Windows.Forms.RadioButton();
             this.rbLDBinary = new System.Windows.Forms.RadioButton();
+            this.btSet = new System.Windows.Forms.Button();
             this.tbOutput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btClose = new System.Windows.Forms.Button();
@@ -51,9 +52,15 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             this.btLogfile = new System.Windows.Forms.Button();
             this.lbState = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.cbPaymentState = new System.Windows.Forms.CheckBox();
+            this.cbBIC = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btLoadDocument
@@ -98,8 +105,6 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.btAddPage);
             this.groupBox1.Controls.Add(this.panel1);
@@ -109,7 +114,7 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             this.groupBox1.Controls.Add(this.btDocumentData);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(527, 129);
+            this.groupBox1.Size = new System.Drawing.Size(442, 129);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Commands";
@@ -208,6 +213,16 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             this.rbLDBinary.Text = "Binary";
             this.rbLDBinary.UseVisualStyleBackColor = true;
             // 
+            // btSet
+            // 
+            this.btSet.Location = new System.Drawing.Point(6, 16);
+            this.btSet.Name = "btSet";
+            this.btSet.Size = new System.Drawing.Size(139, 23);
+            this.btSet.TabIndex = 7;
+            this.btSet.Text = "Set";
+            this.btSet.UseVisualStyleBackColor = true;
+            this.btSet.Click += new System.EventHandler(this.btSet_Click);
+            // 
             // tbOutput
             // 
             this.tbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -217,7 +232,7 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             this.tbOutput.Multiline = true;
             this.tbOutput.Name = "tbOutput";
             this.tbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbOutput.Size = new System.Drawing.Size(527, 340);
+            this.tbOutput.Size = new System.Drawing.Size(602, 340);
             this.tbOutput.TabIndex = 0;
             // 
             // label1
@@ -232,7 +247,7 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             // btClose
             // 
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btClose.Location = new System.Drawing.Point(400, 582);
+            this.btClose.Location = new System.Drawing.Point(475, 582);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(139, 23);
             this.btClose.TabIndex = 4;
@@ -261,7 +276,7 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             // btLogfile
             // 
             this.btLogfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btLogfile.Location = new System.Drawing.Point(255, 582);
+            this.btLogfile.Location = new System.Drawing.Point(330, 582);
             this.btLogfile.Name = "btLogfile";
             this.btLogfile.Size = new System.Drawing.Size(139, 23);
             this.btLogfile.TabIndex = 6;
@@ -288,12 +303,52 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             this.label4.TabIndex = 8;
             this.label4.Text = "State:";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btSet);
+            this.groupBox2.Controls.Add(this.panel3);
+            this.groupBox2.Location = new System.Drawing.Point(460, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(154, 129);
+            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Configuration";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.cbPaymentState);
+            this.panel3.Controls.Add(this.cbBIC);
+            this.panel3.Location = new System.Drawing.Point(6, 45);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(139, 46);
+            this.panel3.TabIndex = 6;
+            // 
+            // cbPaymentState
+            // 
+            this.cbPaymentState.AutoSize = true;
+            this.cbPaymentState.Location = new System.Drawing.Point(3, 26);
+            this.cbPaymentState.Name = "cbPaymentState";
+            this.cbPaymentState.Size = new System.Drawing.Size(93, 17);
+            this.cbPaymentState.TabIndex = 2;
+            this.cbPaymentState.Text = "Payment state";
+            this.cbPaymentState.UseVisualStyleBackColor = true;
+            // 
+            // cbBIC
+            // 
+            this.cbBIC.AutoSize = true;
+            this.cbBIC.Location = new System.Drawing.Point(3, 3);
+            this.cbBIC.Name = "cbBIC";
+            this.cbBIC.Size = new System.Drawing.Size(43, 17);
+            this.cbBIC.TabIndex = 0;
+            this.cbBIC.Text = "BIC";
+            this.cbBIC.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AccessibleName = "";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(551, 617);
+            this.ClientSize = new System.Drawing.Size(625, 617);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.lbState);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btLogfile);
@@ -311,6 +366,9 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,6 +398,10 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
         private System.Windows.Forms.Button btLogfile;
         private System.Windows.Forms.Label lbState;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btSet;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.CheckBox cbPaymentState;
+        private System.Windows.Forms.CheckBox cbBIC;
     }
 }
-
