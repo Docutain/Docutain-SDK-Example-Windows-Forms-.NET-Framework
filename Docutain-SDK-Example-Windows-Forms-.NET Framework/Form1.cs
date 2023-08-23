@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
 {
@@ -17,14 +18,45 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
             //set log level according to your needs
             Docutain.SDK.Windows.Logger.SetLogLevel(Docutain.SDK.Windows.Logger.Level.Debug);
 
+            string License_Key = "<YOUR-LICENSE-KEY>";
+            string TrailLicenseUrl = "https://sdk.docutain.com/TrialLicense?Source=131584";
+
             //initialize the Docutain SDK with your license key
-            if (!Docutain.SDK.Windows.DocutainSDK.InitSDK("<YOUR-LICENSE-KEY>", Path.GetTempPath()))
+            if (!Docutain.SDK.Windows.DocutainSDK.InitSDK(License_Key, System.IO.Path.GetTempPath()))
             {
                 WriteState("SDK initialization failed");
                 btLoadDocument.Enabled = false;
-                MessageBox.Show(Docutain.SDK.Windows.DocutainSDK.GetLastError());
+
+                if (License_Key == "<YOUR-LICENSE-KEY>")
+                {
+                    DialogResult rc = MessageBox.Show("A valid trial license key is required. You can generate a trial license key on our website.", "Trial license needed", MessageBoxButtons.YesNo);
+
+                    if (rc == DialogResult.Yes)
+                        ShowBrowser(TrailLicenseUrl);
+
+                    WriteState("No valid LICENSE-KEY");
+                    tbOutput.Text = "License_Key = <YOUR-LICENSE-KEY> in MainWindows.xaml.cs must be replaced with your trial license key.\n\nYou can generate a trial license key on our website.\n" + TrailLicenseUrl;
+                }
+                else
+                {
+                    MessageBox.Show(Docutain.SDK.Windows.DocutainSDK.GetLastError());
+                }
             }
- 			WriteState("SDK initialized");
+            else
+            {
+                WriteState("SDK initialized");
+            }
+        }
+
+        public static void ShowBrowser(string url)
+        {
+            var ps = new ProcessStartInfo(url)
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+
+            Process.Start(ps);
         }
 
         private void EnableButtons(bool Enable)
@@ -250,6 +282,6 @@ namespace Docutain_SDK_Example_Windows_Forms_.NET_Framework
         public string Street { get; set; }
         public string Phone { get; set; }
         public string CustomerId { get; set; }
-        public string IBAN { get; set; }
+        public string[] IBAN { get; set; }
     }
 }
